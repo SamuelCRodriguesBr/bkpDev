@@ -1,0 +1,52 @@
+/*
+ * Autor: Samuel Carvalho Rodrigues
+ * Business
+ * generic.business
+ * 
+ */
+/*global require module Java logging scriptContext*/
+(function Business(scope) {
+	'use strict';
+	
+	var logger = require("inpaas.core.log");
+	var daoFactory = require("inpaas.core.entity.dao");
+	
+	scope["insert"] = function(data,entity){
+	    logger.error("Business - insert entity:"+entity, data);
+		var dao =  daoFactory.getDao(entity);
+		return dao.insert(data);
+	};
+	
+	scope["update"] = function(data,entity){
+	    logger.error("Business - update entity:"+entity, data);
+		var dao =  daoFactory.getDao(entity);
+		return dao.update(data);
+	};
+	
+	scope["selectById"] = function(data,entity){
+		logger.error("Business - selectById entity:"+entity, data);
+		var dao =  daoFactory.getDao(entity);
+		return dao.findByPrimaryKey(data);
+	};
+	
+	scope["select"] = function(data,entity){
+	    logger.error("Business - select entity:"+entity, data);
+		var dao =  daoFactory.getDao(entity);
+		return dao.find(data);
+	};
+	
+	scope["selectAll"] = function(entity){
+	    logger.error("Business - select entity:"+entity, entity);
+		var dao =  daoFactory.getDao(entity);
+		return dao.find();
+	};
+	
+	scope["deleteById"] = function(data,entity){
+	    logger.error("Business - delete entity:"+entity, data);
+		var dao =  daoFactory.getDao(entity);
+		return dao.delete(data);
+	};
+	
+	return scope;
+
+})(typeof module !== "undefined" ? module.exports : {});

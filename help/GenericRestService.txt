@@ -1,0 +1,114 @@
+/*
+ * Autor: Samuel Carvalho Rodrigues
+ * rest
+ * generic.rest
+ * 
+ */
+/*global require module Java logging scriptContext*/
+/*globals RESTService */
+(function rest(scope) {
+	'use strict';
+	
+	var logger = require("inpaas.core.log");
+	var business = require("generic.business");
+	
+	/* EXEMPLO DE IMPLEMENTAÇÂO NO CLIENT: 
+	 * 	 RESTService("generic.rest").insert(getDataGeneric(),function(response){
+  	 *  	alert(JSON.stringify(response));
+     * 	 fecharModal();
+  	 * });
+  	 */
+	
+	/* data: {
+	 * 		data: "objeto referente à entity",
+	 *  	entity: "nome da entity"
+	 * }
+	 */
+	RESTService.addEndpoint({ "name": "insert", "method": "POST" }, function(data){
+		logger.error("Generic REST - insert");
+		var dadosEntidade = data.data;
+		var entity = data.entity;
+		
+		logger.error("Generic REST - insert entity:"+entity,data);
+		return business.insert(data,entity);
+	});
+	
+	/*
+	data: {
+		data: "objeto referente à entity",
+		entity: "nome da entity"
+	}
+	*/
+	RESTService.addEndpoint({ "name": "update", "method": "POST" }, function(data){
+		logger.error("Generic REST - update");
+		var dadosEntidade = data.data;
+		var entity = data.entity;
+		
+		logger.error("Generic REST - update entity:"+entity,data);
+		return business.update(data,entity);
+	});
+	
+	/*
+	data: {
+		data: "id da entity",
+		entity: "nome da entity"
+	}
+	*/
+	RESTService.addEndpoint({ "name": "selectById", "method": "GET" }, function(data){
+		logger.error("Generic REST - insert");
+		var dadosEntidade = data.data;
+		var entity = data.entity;
+		
+		logger.error("Generic REST - insert entity:"+entity,data);
+		return business.insert(data,entity);
+	});
+	
+	/*
+	data: {
+		data: "objeto referente à entity",
+		entity: "nome da entity"
+	}
+	*/
+	RESTService.addEndpoint({ "name": "select", "method": "GET" }, function(data){
+		logger.error("Generic REST - select");
+		var dadosEntidade = data.data;
+		var entity = data.entity;
+		
+		logger.error("Generic REST - select entity:"+entity,data);
+		return business.select(data,entity);
+	});
+	
+	/*
+	data: {
+		entity: "nome da entity"
+	}
+	*/
+	RESTService.addEndpoint({ "name": "selectAll", "method": "GET" }, function(data){
+		logger.error("Generic REST - selectAll");
+		var dadosEntidade = data.data;
+		var entity = data.entity;
+		
+		logger.error("Generic REST - selectAll entity:"+entity,data);
+		return business.selectAll(data,entity);
+	});
+	
+	/*
+	data: {
+		data: "id da entity",
+		entity: "nome da entity"
+	}
+	*/
+	RESTService.addEndpoint({ "name": "deleteById", "method": "DELETE" }, function(data){
+		logger.error("Generic REST - deleteById");
+		var dadosEntidade = data.data;
+		var entity = data.entity;
+		
+		logger.error("Generic REST - deleteById entity:"+entity,data);
+		return business.deleteById(data,entity);
+	});
+		
+	
+	// check out REST Services docs at:
+	// https://inpaas.atlassian.net/wiki/display/inpaasdevelopers/REST+Services
+	
+})(typeof module !== "undefined" ? module.exports : {});
